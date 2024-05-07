@@ -145,16 +145,12 @@
     }
 
     buttonElement.addEventListener("click", () => {
-      if (nameInputElement.value === "" || nameInputElement.value === " ") {
+      if (nameInputElement.value === "" || nameInputElement.value === " " || textInputElement.value === "" || textInputElement.value === " ") {
         nameInputElement.classList.add("error");
-        return;
-      } else {
-        nameInputElement.classList.remove("error");
-      }
-      if (textInputElement.value === "" || textInputElement.value === " ") {
         textInputElement.classList.add("error");
         return;
       } else {
+        nameInputElement.classList.remove("error");
         textInputElement.classList.remove("error");
       }
       comments.push({
