@@ -48,13 +48,13 @@
         <input
           id="name-input"
           type="text"
-                    class="add-form-name"
+          class="add-form-name"
           placeholder="Введите ваше имя"
         />
         <textarea
           id="text-input"
           type="textarea"
-                    class="add-form-text"
+          class="add-form-text"
           placeholder="Введите ваш коментарий"
           rows="4"
         ></textarea>
@@ -124,7 +124,9 @@
               </li>`;
         })
         .join("");
-        initEventListener();
+      initEventListener();
+      nameInputElement.value = "";
+      textInputElement.value = "";
     }
 
     function initEventListener() {
@@ -145,7 +147,12 @@
     }
 
     buttonElement.addEventListener("click", () => {
-      if (nameInputElement.value === "" || nameInputElement.value === " " || textInputElement.value === "" || textInputElement.value === " ") {
+      if (
+        nameInputElement.value === "" ||
+        nameInputElement.value === " " ||
+        textInputElement.value === "" ||
+        textInputElement.value === " "
+      ) {
         nameInputElement.classList.add("error");
         textInputElement.classList.add("error");
         return;
@@ -164,6 +171,7 @@
       const date = new Date();
     });
     renderComments();
+
     console.log("It works!");
   </script>
 </html>
