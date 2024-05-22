@@ -64,11 +64,11 @@
       </div>
     </div>
   </body>
-<style>
-  .error{
-    background: #650303;
-  }
-</style>
+  <style>
+    .error {
+      background: #650303;
+    }
+  </style>
   <script>
     "use strict";
     const nameInputElement = document.getElementById("name-input");
@@ -84,17 +84,13 @@
     const formateDate = `${day}.${month}.${year} ${hours}:${minutes}`;
 
     buttonElement.addEventListener("click", () => {
-      if (nameInputElement.value === "" || nameInputElement.value === " ") {
+      if (nameInputElement.value === "" || nameInputElement.value === " " || textInputElement.value === "" || textInputElement.value === " ") {
         nameInputElement.classList.add("error");
-        return;
-      } else {
-        nameInputElement.classList.remove("error")
-      }
-      if (textInputElement.value === "" || textInputElement.value === " ") {
         textInputElement.classList.add("error");
         return;
       } else {
-        textInputElement.classList.remove("error")
+        nameInputElement.classList.remove("error");
+        textInputElement.classList.remove("error");
       }
       const date = new Date();
       const oldListHtml = listElement.innerHTML;
