@@ -76,6 +76,7 @@
     const buttonElement = document.getElementById("write-button");
     const listElement = document.getElementById("list");
     const likeButtonElements = document.querySelectorAll(".like-button");
+    const textElement = document.querySelectorAll(".comment-text");
 
     const date = new Date();
     const day = date.getDate().toString().padStart(2, "0");
@@ -111,7 +112,7 @@
                 <div>${comment.date}</div>
               </div>
               <div class="comment-body">
-                <div class="comment-text">
+                <div class="comment-text" data-index="${index}">
                   ${comment.comment}
                 </div>
               </div>
@@ -127,7 +128,17 @@
       initEventListener();
       nameInputElement.value = "";
       textInputElement.value = "";
+
+      const commentText = document.querySelectorAll(".comment-text");
+      commentText.forEach(textElement => {
+        textElement.addEventListener('click', (event) => {
+          const index = textElement.dataset.index;
+          textInputElement.value = `>${comments[index].name}: ${comments[index].comment}`;
+          textInputElement.focus();
+        });
+      });
     }
+    renderComments();
 
     function initEventListener() {
       const likeButtonElements = document.querySelectorAll(".like-button");
@@ -161,9 +172,17 @@
         textInputElement.classList.remove("error");
       }
       comments.push({
-        name: nameInputElement.value,
+        name: nameInputElement.value
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;"),
         date: formateDate,
-        comment: textInputElement.value,
+        comment: textInputElement.value
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;"),
         isLiked: false,
         likeCount: 0,
       });
